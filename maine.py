@@ -1,20 +1,21 @@
 print('Welcome to dodo')
-while True:
+def oddeven():
     try:
         no1 = int(input('Enter a number and we\'ll see if it is odd or even\n'))
         if (no1 % 2) == 0 and int:
             print('Even')
-        elif (no1 %2 != 0) and int:
+        elif (no1 %2) != 0 and int:
             print('Odd')
     except: ValueError
-    print('Input a number')
-
+    print('Input a number this time')
+    
     no2 = input('Would you like to go again? \n')
-    if no2 == ('Y', 'yes', 'YES', 'Yes', 'y'):
-        continue
-    elif no2 == ('N', 'no', 'NO', 'No', 'n'):
+    if no2 in ('Y', 'yes', 'YES', 'Yes', 'y'):
+        oddeven()
+    elif no2 in ('N', 'no', 'NO', 'No', 'n'):
         print('Goodbye')
-        break
+        exit()
     else:
         print('Wrong')
-        break
+        
+oddeven()
