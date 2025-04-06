@@ -6,16 +6,28 @@ def oddeven():
             print('Even')
         elif (no1 %2) != 0 and int:
             print('Odd')
-    except: ValueError
-    print('Input a number this time')
+    except ValueError:
+        print('Input a number this time')
     
     no2 = input('Would you like to go again? \n')
     if no2 in ('Y', 'yes', 'YES', 'Yes', 'y'):
         oddeven()
     elif no2 in ('N', 'no', 'NO', 'No', 'n'):
-        print('Goodbye')
-        exit()
+        Kr = input('Kamen Rider?')
+        if Kr in ('Y', 'yes', 'YES', 'Yes', 'y'):
+         loops()
+        elif Kr in ('N', 'no', 'NO', 'No', 'n'):
+            print('Goodbye ?')
+            exit()
+        else:
+            print('Wrong')
     else:
         print('Wrong')
         
 oddeven()
+
+def loops():
+    colors = ["Red", "Green", "Yellow", "Black", "Blue"]
+    KRider = "Rider"
+    for y in colors:
+            print(f' {y} {KRider}')
