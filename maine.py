@@ -15,7 +15,12 @@ def oddeven():
     elif no2 in ('N', 'no', 'NO', 'No', 'n'):
         Kr = input('Kamen Rider?')
         if Kr in ('Y', 'yes', 'YES', 'Yes', 'y'):
-         loops()
+         def loops():
+            colors = ["Red", "Green", "Yellow", "Black", "Blue"]
+            KRider = "Rider"
+            for y in colors:
+                print(f' {y} {KRider}')
+                loops()
         elif Kr in ('N', 'no', 'NO', 'No', 'n'):
             print('Goodbye ?')
             exit()
@@ -25,9 +30,3 @@ def oddeven():
         print('Wrong')
         
 oddeven()
-
-def loops():
-    colors = ["Red", "Green", "Yellow", "Black", "Blue"]
-    KRider = "Rider"
-    for y in colors:
-            print(f' {y} {KRider}')
