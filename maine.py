@@ -41,3 +41,13 @@ def arrae():
                 print("Largest value:", largest)
 
 arrae()
+
+def threshold():
+    nummason = [[3, 8, 1],[5, 7, 2],[9, 4, 6]]
+    threshold = 5
+    smaller = []
+    for x in nummason:
+        for y in x:
+            if y < threshold:
+                smaller.append(y)
+            print(f"Values smaller than {threshold}:", smaller)
