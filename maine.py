@@ -30,3 +30,14 @@ def oddeven():
         print('Wrong')
         
 oddeven()
+
+def arrae():
+    nummason = [[3, 8, 1],[5, 7, 2],[9, 4, 6]]
+    largest = nummason[0][0]
+    for w in nummason:
+        for v in w:
+            if v > largest:
+                largest = v
+                print("Largest value:", largest)
+
+arrae()
