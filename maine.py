@@ -51,3 +51,5 @@ def threshold():
             if y < threshold:
                 smaller.append(y)
             print(f"Values smaller than {threshold}:", smaller)
+
+threshold()
