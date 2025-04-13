@@ -1,16 +1,22 @@
+import random
 def game():
-    G = input('1 for Rock, 2 for Paper and 3 for Scissors')
-    if G in ('1'):
+    
+    P = input('Rock, Paper or Scissor? Type in 1-3 respectively if you are lazy,').strip().upper()
+    
+    com = random.choice(['ROCK','PAPER','SCISSOR'])
+    
+    if P in ('ROCK','1'):
         print('Currently under construction, try again later, Goodbye?')
         exit()
-    elif G in ('2'):
+    elif P in ('PAPER','2'):
         print('Currently under construction, try again later, Goodbye?')
         exit()
-    elif G in ('3'):
+    elif P in ('SCISSOR','3'):
         print('Currently under construction, try again later, Goodbye?')
         exit()
     else:
         print('I don\'t understand, try that again')
+        return game()
 
 while True:
     play = input('Welcome, wanna play? \n')
