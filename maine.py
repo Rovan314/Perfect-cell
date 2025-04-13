@@ -5,18 +5,17 @@ def game():
     
     com = random.choice(['ROCK','PAPER','SCISSOR'])
     
-    if P in ('ROCK','1'):
-        print('Currently under construction, try again later, Goodbye?')
-        exit()
-    elif P in ('PAPER','2'):
-        print('Currently under construction, try again later, Goodbye?')
-        exit()
-    elif P in ('SCISSOR','3'):
-        print('Currently under construction, try again later, Goodbye?')
-        exit()
-    else:
+    if P not in ('ROCK','PAPER', 'SCISSOR', '1', '2', '3'):
         print('I don\'t understand, try that again')
         return game()
+    elif P in ('ROCK', '1') and com in 'SCISSOR':
+        print ('You won (＾＾)ｂ')
+    elif P in ('PAPER','2') and com in 'ROCK':
+        print('You won (＾＾)ｂ')
+    elif P in ('SCISSOR','3') and com in 'PAPER':
+        print('You won (＾＾)ｂ')
+    else:
+        print('The Computer won')
 
 while True:
     play = input('Welcome, wanna play? \n')
