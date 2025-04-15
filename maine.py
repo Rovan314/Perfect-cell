@@ -5,6 +5,8 @@ def game():
     
     com = random.choice(['ROCK','PAPER','SCISSOR'])
     
+    print(f'You chose {P} + and the PC chose {com}')
+
     if P not in ('ROCK','PAPER', 'SCISSOR', '1', '2', '3'):
         print('I don\'t understand, try that again')
         return game()
