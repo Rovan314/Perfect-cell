@@ -10,6 +10,8 @@ def game():
     if P not in ('ROCK','PAPER', 'SCISSOR', '1', '2', '3'):
         print('I don\'t understand, try that again')
         return game()
+    elif P == com:
+        print('It\'s a tie')
     elif P in ('ROCK', '1') and com in 'SCISSOR':
         print ('You won (＾＾)ｂ')
     elif P in ('PAPER','2') and com in 'ROCK':
