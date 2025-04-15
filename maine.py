@@ -1,22 +1,42 @@
 import random
-def game():
+from enum import Enum
     
-    P = input('Rock, Paper or Scissor? Type in 1-3 respectively if you are lazy,').strip().upper()
+class Move(Enum):
+    ROCK = 1
+    PAPER = 2
+    SCISSOR = 3
     
-    com = random.choice(['ROCK','PAPER','SCISSOR'])
-    
-    print(f'You chose {P} + and the PC chose {com}')
+    @classmethod
+    def from_input(cls, input_str):
+        input_str = input_str.strip().upper()
+        if input_str in ('1', 'ROCK'):
+            return cls.ROCK
+        elif input_str in ('2', 'PAPER'):
+            return cls.PAPER
+        elif input_str in ('3', 'SCISSOR'):
+            return cls.SCISSOR
+        else:
+            return None
 
-    if P not in ('ROCK','PAPER', 'SCISSOR', '1', '2', '3'):
-        print('I don\'t understand, try that again')
+def game():
+    P_input = input('Rock, Paper or Scissor? Type in 1-3 respectively if you are lazy: ').strip().lower()
+    P = Move.from_input(P_input)
+    
+    if not P:
+        print("I don't understand, try that again")
         return game()
-    elif P == com:
-        print('It\'s a tie')
-    elif P in ('ROCK', '1') and com in 'SCISSOR':
+    
+    com = random.choice(list(Move))
+
+    print(f'You chose {P.name} and the PC chose {com.name}')
+
+    if P == com:
+        print("It's a tie")
+    elif P == Move.ROCK and com == Move.SCISSOR:
         print ('You won (＾＾)ｂ')
-    elif P in ('PAPER','2') and com in 'ROCK':
+    elif P == Move.PAPER and com == Move.ROCK:
         print('You won (＾＾)ｂ')
-    elif P in ('SCISSOR','3') and com in 'PAPER':
+    elif P == Move.SCISSOR and com == Move.PAPER:
         print('You won (＾＾)ｂ')
     else:
         print('The Computer won')
