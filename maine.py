@@ -41,7 +41,15 @@ def game():
     else:
         print('The Computer won')
 
-while True:
+    final = input('Would you like to play again? \n')
+    if final in ("Yes", 'Y', "y", "yes", "YES"):
+        print('Very well')
+        return game()
+    elif play in ('No', "N", "n", "no", "YES"):
+        print('Goodbye?')
+        exit()
+
+def play():
     play = input('Welcome, wanna play? \n')
     if play in ("Yes", 'Y', "y", "yes", "YES"):
         game()
@@ -50,3 +58,4 @@ while True:
         exit()
     else:
         print('I don\'t understand, try that again')
+play()
