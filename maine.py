@@ -22,6 +22,9 @@ def game():
     P_input = input('Rock, Paper or Scissor? Type in 1-3 respectively if you are lazy: ').strip().lower()
     P = Move.from_input(P_input)
     
+    Pwin = 0
+    Cwin = 0
+
     if not P:
         print("I don't understand, try that again")
         return game()
@@ -34,28 +37,46 @@ def game():
         print("It's a tie")
     elif P == Move.ROCK and com == Move.SCISSOR:
         print ('You won (＾＾)ｂ')
+        Pwin += 1
     elif P == Move.PAPER and com == Move.ROCK:
         print('You won (＾＾)ｂ')
+        Pwin += 1
     elif P == Move.SCISSOR and com == Move.PAPER:
         print('You won (＾＾)ｂ')
+        Pwin += 1
     else:
         print('The Computer won')
-
-    final = input('Would you like to play again? \n')
-    if final in ("Yes", 'Y', "y", "yes", "YES"):
-        print('Very well')
-        return game()
-    elif play in ('No', "N", "n", "no", "YES"):
-        print('Goodbye?')
-        exit()
+        Cwin += 1
+    
+    print(f'You won {Pwin} times and the Computer won {Cwin}\n')
+    
+    if Pwin > Cwin:
+        print('Looks like you are in the lead\n')
+    elif Pwin < Cwin:
+        print('The Computer is in the lead')
+    else:
+        print('So far it looks like an even game')
+        
+    while True:
+            final = input('Want to play again? \n')
+            if final in ("Yes", 'Y', "y", "yes", "YES"):
+                game()
+            elif final in ('No', "N", "n", "no", "YES"):
+                print('Goodbye?')
+                exit()
+            else:
+                print('I don\'t understand, try that again')
+                continue
 
 def play():
-    play = input('Welcome, wanna play? \n')
-    if play in ("Yes", 'Y', "y", "yes", "YES"):
-        game()
-    elif play in ('No', "N", "n", "no", "YES"):
-        print('Goodbye?')
-        exit()
-    else:
-        print('I don\'t understand, try that again')
+    while True:
+        play = input('Welcome, wanna play? \n')
+        if play in ("Yes", 'Y', "y", "yes", "YES"):
+            game()
+        elif play in ('No', "N", "n", "no", "YES"):
+            print('Goodbye?')
+            exit()
+        else:
+            print('I don\'t understand, try that again')
+            continue
 play()
