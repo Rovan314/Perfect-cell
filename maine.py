@@ -18,12 +18,13 @@ class Move(Enum):
         else:
             return None
 
+Pwin = 0
+Cwin = 0
+
 def game():
+    global Pwin, Cwin
     P_input = input('Rock, Paper or Scissor? Type in 1-3 respectively if you are lazy: ').strip().lower()
     P = Move.from_input(P_input)
-    
-    Pwin = 0
-    Cwin = 0
 
     if not P:
         print("I don't understand, try that again")
