@@ -31,7 +31,7 @@ def game():
     
     com = random.choice(list(Move))
 
-    print(f'You chose {P.name} and the PC chose {com.name}')
+    print(f'You chose {P.name} and the PC chose {com.name}\n')
 
     if P == com:
         print("It's a tie")
@@ -48,7 +48,7 @@ def game():
         print('The Computer won')
         Cwin += 1
     
-    print(f'You won {Pwin} times and the Computer won {Cwin}\n')
+    print(f'\nYou won {Pwin} times and the Computer won {Cwin}\n')
     
     if Pwin > Cwin:
         print('Looks like you are in the lead\n')
@@ -56,7 +56,7 @@ def game():
         print('The Computer is in the lead')
     else:
         print('So far it looks like an even game')
-        
+
     while True:
             final = input('Want to play again? \n')
             if final in ("Yes", 'Y', "y", "yes", "YES"):
