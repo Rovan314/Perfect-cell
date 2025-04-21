@@ -62,7 +62,7 @@ def game():
             final = input('Want to play again? \n')
             if final in ("Yes", 'Y', "y", "yes", "YES"):
                 game()
-            elif final in ('No', "N", "n", "no", "YES"):
+            elif final in ('No', "N", "n", "no"):
                 print('Goodbye?')
                 exit()
             else:
