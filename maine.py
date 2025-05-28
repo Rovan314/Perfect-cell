@@ -18,6 +18,23 @@ class Move(Enum):
         else:
             return None
 
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.wins = 0
+        self.losses = 0
+        self.draws = 0
+        pass
+
+    def record_result(self, outcome):
+        if outcome == "win":
+            self.wins += 1
+        elif outcome == "loss":
+            self.losses += 1
+        else:
+            self.draws += 1
+        pass
+
 Pwin = 0
 Cwin = 0
 
