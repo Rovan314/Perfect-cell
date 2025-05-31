@@ -1,22 +1,25 @@
 import random
-from enum import Enum
-    
+from enum import Enum, auto
+
+
 class Move(Enum):
-    ROCK = 1
-    PAPER = 2
-    SCISSOR = 3
-    
-    @classmethod
-    def from_input(cls, input_str):
-        input_str = input_str.strip().upper()
-        if input_str in ('1', 'ROCK'):
-            return cls.ROCK
-        elif input_str in ('2', 'PAPER'):
-            return cls.PAPER
-        elif input_str in ('3', 'SCISSOR'):
-            return cls.SCISSOR
-        else:
-            return None
+    ROCK = auto()
+    PAPER = auto()
+    SCISSORS = auto()
+
+    @staticmethod
+    def from_input(inp):
+        inp = inp.strip().lower()
+        mapping = {
+            '1': Move.ROCK,
+            '2': Move.PAPER,
+            '3': Move.SCISSORS,
+            'rock': Move.ROCK,
+            'paper': Move.PAPER,
+            'scissors': Move.SCISSORS
+        }
+        return mapping.get(inp)
+
 
 class Player:
     def __init__(self, name):
@@ -24,7 +27,6 @@ class Player:
         self.wins = 0
         self.losses = 0
         self.draws = 0
-        pass
 
     def record_result(self, outcome):
         if outcome == "win":
@@ -33,68 +35,58 @@ class Player:
             self.losses += 1
         else:
             self.draws += 1
-        pass
 
-Pwin = 0
-Cwin = 0
+    def __str__(self):
+        return f"{self.name} | Wins: {self.wins}, Losses: {self.losses}, Draws: {self.draws}"
 
-def game():
-    global Pwin, Cwin
-    P_input = input('Rock, Paper or Scissor? Type in 1-3 respectively if you are lazy: ').strip().lower()
-    P = Move.from_input(P_input)
 
-    if not P:
-        print("I don't understand, try that again")
-        return game()
-    
-    com = random.choice(list(Move))
+class Game:
+    def __init__(self):
+        self.player = None
 
-    print(f'You chose {P.name} and the PC chose {com.name}\n')
+    def start(self):
+        name = input("Enter your name: ").strip()
+        self.player = Player(name)
+        self.play_loop()
 
-    if P == com:
-        print("It's a tie")
-    elif P == Move.ROCK and com == Move.SCISSOR:
-        print ('You won (＾＾)ｂ')
-        Pwin += 1
-    elif P == Move.PAPER and com == Move.ROCK:
-        print('You won (＾＾)ｂ')
-        Pwin += 1
-    elif P == Move.SCISSOR and com == Move.PAPER:
-        print('You won (＾＾)ｂ')
-        Pwin += 1
-    else:
-        print('The Computer won')
-        Cwin += 1
-    
-    print(f'\nYou won {Pwin} times and the Computer won {Cwin}\n')
-    
-    if Pwin > Cwin:
-        print('Looks like you are in the lead\n')
-    elif Pwin < Cwin:
-        print('The Computer is in the lead')
-    else:
-        print('So far it looks like an even game')
+    def get_computer_move(self):
+        return random.choice(list(Move))
 
-    while True:
-            final = input('Want to play again? \n')
-            if final in ("Yes", 'Y', "y", "yes", "YES"):
-                game()
-            elif final in ('No', "N", "n", "no"):
-                print('Goodbye?')
-                exit()
-            else:
-                print('I don\'t understand, try that again')
+    def decide_winner(self, user_move, comp_move):
+        outcomes = {
+            (Move.ROCK, Move.SCISSORS): "win",
+            (Move.PAPER, Move.ROCK): "win",
+            (Move.SCISSORS, Move.PAPER): "win",
+            (Move.ROCK, Move.PAPER): "loss",
+            (Move.PAPER, Move.SCISSORS): "loss",
+            (Move.SCISSORS, Move.ROCK): "loss",
+        }
+        return "draw" if user_move == comp_move else outcomes.get((user_move, comp_move), "loss")
+
+    def play_loop(self):
+        while True:
+            print("\nChoose your move: 1) Rock  2) Paper  3) Scissors")
+            user_input = input("Your move: ")
+            move = Move.from_input(user_input)
+
+            if not move:
+                print("Invalid input. Please enter 1/2/3 or rock/paper/scissors.")
                 continue
 
-def play():
-    while True:
-        play = input('Welcome, wanna play? \n')
-        if play in ("Yes", 'Y', "y", "yes", "YES"):
-            game()
-        elif play in ('No', "N", "n", "no", "YES"):
-            print('Goodbye?')
-            exit()
-        else:
-            print('I don\'t understand, try that again')
-            continue
-play()
+            comp_move = self.get_computer_move()
+            result = self.decide_winner(move, comp_move)
+
+            print(f"\nYou: {move.name}, Computer: {comp_move.name}. Result: {result.upper()}")
+            self.player.record_result(result)
+
+            print(f"Stats: {self.player}")
+
+            again = input("\nPlay again? (y/n): ").strip().lower()
+            if again not in ("y", "yes"):
+                print("\nFinal Stats:")
+                print(self.player)
+                break
+
+
+if __name__ == "__main__":
+    Game().start()
