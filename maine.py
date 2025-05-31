@@ -36,6 +36,14 @@ class Player:
         else:
             self.draws += 1
 
+    def overall_feedback(self):
+        if self.wins > self.losses:
+            return "Looks like you are in the lead\n"
+        elif self.losses > self.wins:
+            return "The Computer is in the lead\n"
+        else:
+            return "So far it looks like a tie\n"
+
     def __str__(self):
         return f"{self.name} | Wins: {self.wins}, Losses: {self.losses}, Draws: {self.draws}"
 
@@ -47,6 +55,7 @@ class Game:
     def start(self):
         name = input("Enter your name: ").strip()
         self.player = Player(name)
+        print(f"\nWelcome, {name}! Let's play Rock-Paper-Scissors.\n")
         self.play_loop()
 
     def get_computer_move(self):
@@ -66,6 +75,7 @@ class Game:
     def play_loop(self):
         while True:
             print("\nChoose your move: 1) Rock  2) Paper  3) Scissors")
+            print("(You can enter the number or the move name)")
             user_input = input("Your move: ")
             move = Move.from_input(user_input)
 
@@ -76,14 +86,16 @@ class Game:
             comp_move = self.get_computer_move()
             result = self.decide_winner(move, comp_move)
 
-            print(f"\nYou: {move.name}, Computer: {comp_move.name}. Result: {result.upper()}")
+            print(f"\nYou chose {move.name}, Computer chose {comp_move.name}. Result: {result.upper()}")
             self.player.record_result(result)
 
-            print(f"Stats: {self.player}")
+            print(f"\nCurrent Stats: {self.player}")
+            print(self.player.overall_feedback())
 
             again = input("\nPlay again? (y/n): ").strip().lower()
             if again not in ("y", "yes"):
-                print("\nFinal Stats:")
+                print("\nThanks for playing!")
+                print("Final Stats:")
                 print(self.player)
                 break
 
