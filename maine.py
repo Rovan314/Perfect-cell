@@ -34,12 +34,14 @@ class Player:
         self.draws = int(draws)
 
     def record_result(self, outcome: str) -> None:
-        if outcome == "win":
-            self.wins += 1
-        elif outcome == "loss":
-            self.losses += 1
-        else:
-            self.draws += 1
+        for x in outcome:
+            if outcome == x:
+                if x == "win":
+                    self.wins += 1
+                elif x == "loss":
+                    self.losses += 1
+                else:
+                    self.draws += 1
 
     def get_feedback(self) -> str:
         if self.wins > self.losses:
